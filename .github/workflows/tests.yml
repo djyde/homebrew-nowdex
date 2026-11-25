@@ -1,0 +1,35 @@
+name: Test cask
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Link this checkout as the tap
+        run: |
+          tap="$(brew --repository)/Library/Taps/djyde/homebrew-nowdex"
+          mkdir -p "$(dirname "$tap")"
+          rm -rf "$tap"
+          ln -s "$GITHUB_WORKSPACE" "$tap"
+
+      - name: Style
+        run: brew style djyde/nowdex
+
+      - name: Audit
+        run: brew audit --cask --strict --online djyde/nowdex/nowdex
+
+      - name: Livecheck
+        run: brew livecheck --cask djyde/nowdex/nowdex
+
+      - name: Install and uninstall
+        run: |
+          brew install --cask djyde/nowdex/nowdex
+          test -d /Applications/Nowdex.app
+          brew uninstall --cask djyde/nowdex/nowdex

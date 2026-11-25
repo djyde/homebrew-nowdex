@@ -1,0 +1,32 @@
+name: Update cask
+
+on:
+  schedule:
+    - cron: "17 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-cask
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check the Nowdex appcast
+        id: update
+        run: bash .github/scripts/update-cask.sh
+
+      - name: Commit and push
+        if: steps.update.outputs.version != ''
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add Casks/nowdex.rb
+          git commit -m "nowdex ${{ steps.update.outputs.version }}"
+          git push
