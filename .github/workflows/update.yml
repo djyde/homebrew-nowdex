@@ -28,5 +28,5 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add Casks/nowdex.rb
-          git commit -m "nowdex ${{ steps.update.outputs.version }}"
+          git commit -m "Update nowdex to ${{ steps.update.outputs.version }}"
           git push

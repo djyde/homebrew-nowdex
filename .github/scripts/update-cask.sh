@@ -41,5 +41,5 @@ rm "$cask.bak"
 
 echo "Updated cask from $current_version to $new_version."
 if [[ -n "${GITHUB_OUTPUT:-}" ]]; then
-  echo "version=$short ($build)" >> "$GITHUB_OUTPUT"
+  echo "version=$new_version" >> "$GITHUB_OUTPUT"
 fi
