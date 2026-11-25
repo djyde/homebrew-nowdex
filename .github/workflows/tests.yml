@@ -18,6 +18,8 @@ jobs:
           mkdir -p "$(dirname "$tap")"
           rm -rf "$tap"
           ln -s "$GITHUB_WORKSPACE" "$tap"
+          # Homebrew 7 loads other taps' casks only once they're trusted; older runners lack the command.
+          if brew commands --quiet | grep -qx trust; then brew trust djyde/nowdex; fi
 
       - name: Style
         run: brew style djyde/nowdex

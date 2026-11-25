@@ -22,10 +22,11 @@
 brew install --cask djyde/nowdex/nowdex
 ```
 
-That's it. Homebrew taps this repository for you. Or tap it first:
+That's it. Homebrew taps this repository and trusts the cask for you. Homebrew 7 and later load casks from other taps only after you trust them, so to tap first and install by the short name, trust the tap too:
 
 ```sh
 brew tap djyde/nowdex
+brew trust djyde/nowdex
 brew install --cask nowdex
 ```
 
@@ -33,7 +34,7 @@ In a `Brewfile`:
 
 ```ruby
 tap "djyde/nowdex"
-cask "nowdex"
+cask "djyde/nowdex/nowdex", trusted: true
 ```
 
 Requires macOS 15.6 (Sequoia) or later, on Apple silicon or Intel.
