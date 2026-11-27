@@ -1,6 +1,6 @@
 cask "nowdex" do
-  version "1.5.1,256"
-  sha256 "5a21f64b6b12882c184162040e4bdc387cae9213ceecea5f57a976095b4e3e07"
+  version "1.5.2,260"
+  sha256 "12334ccf81df0591500f04322ab6e656e87aa5dccffe861dce9c29bd7240ea04"
 
   url "https://updates.nowdex.app/macos/Nowdex-#{version.csv.first}-#{version.csv.second}.zip"
   name "Nowdex"
